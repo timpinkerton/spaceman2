@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <title>FSJS</title>
+    <title>Spaceman Brewery</title>
   </head>
   <body>
     <h1>Here we go...</h1>
@@ -15,8 +15,8 @@
     <script id="list-template" type="text/x-handlebars-template">
       {{#each list}}
       <div class="row">
-        <div class="col-xs-6"><strong>{{name}}</strong></div>
-        <div class="col-xs-6">{{value}}</div>
+        <div class="col-xs-6"><strong>{{title}}</strong></div>
+        <div class="col-xs-6">{{post}}</div>
       </div>
       {{/each}}
     </script>
@@ -27,8 +27,8 @@
 
     <script>
       $(document).ready(function() {
-        const data = { name: "Code Louisvillains" }
-        const greetingTemplate = 'Hello {{name}}! I am a template!';
+        const data = { post: "Spaceman" }
+        const greetingTemplate = 'hey {{post}}! make me some beer. Thanks';
         const greetingCompiled = Handlebars.compile(greetingTemplate);
         const greetingRendered = greetingCompiled(data);
 
@@ -41,10 +41,10 @@
       $(document).ready(function() {
         const data = {
           list: [
-            {name: 'Buffy', value: 'Slayer, guidance counselor'},
-            {name: 'Willow', value: 'Witch'},
-            {name: 'Xander', value: 'Dude, construction worker'},
-            {name: 'Giles', value: 'Watcher, Librarian'},
+            {title: 'Post 1', post: 'jibba jabba'},
+            {title: 'Post 2', post: 'ooooohhh lordy'},
+            {title: 'Post 3', post: 'Dude, construction worker'},
+            {title: 'Post 4', post: 'handy dandy mandy'},
           ],
         };
 

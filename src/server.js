@@ -2,6 +2,7 @@
 const express = require('express');
 const config = require('./config');
 const path = require('path');
+const router = require('./routes');
 
 const app = express(); 
 
@@ -10,14 +11,7 @@ const publicPath = path.resolve(__dirname, './public');
 //static is the middleware function that serves static files
 app.use(express.static(publicPath));
 
-
-app.use('/doc', function(req, res, next) {
-  res.end(`Documentation http://expressjs.com/`);
-});
-
-app.use(function(req, res, next){
-    res.send('Hello Whirled!');
-});
+app.use('/api', router);
 
 
 app.listen(config.port, function(){
