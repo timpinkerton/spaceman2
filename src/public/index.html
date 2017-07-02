@@ -7,22 +7,59 @@
     <title>Spaceman Brewery</title>
   </head>
   <body>
-    <h1>Here we go...</h1>
+    <div class="container">
+      <h1>Spaceman Brewery</h1>
+      <!--clicking this button will show the form to add new posts-->
+      <button id="addNewPostButton" class="btn btn-primary" onclick="toggleAddNewPost()">New Post</button>
 
-    <div id="list-container"></div>
+      <!--this is the form to add new posts and edit posts-->
+      <div id="form-container" class="panel hidden">
+        <form>
+          <div>
+            <label>Title:</label>
+            <input type="text" id="newPostTitle">
+          </div>
+          <div>
+            <label>Post:</label>
+            <input type="text" id="newPostBody">
+          </div> 
+          <div>
+            <label>Author:</label>
+            <input type="text" id="newPostAuthor">
+          </div>
+
+          <!--buttons to either submit or cancel a new post-->
+          <button type="button" class="btn btn-default" onclick="submitNewPost()">Post it!</button>
+          <button type="button" class="btn btn-default" onclick="cancelNewPost()">Nevermind</button>
+
+        </form>
+      </div>
+
+      <div id="list-container"></div>
+    </div>
+
 
 
     <script id="list-template" type="text/x-handlebars-template">
       <ul class="list-group">
         {{#each files}}
         <li class="list-group-item">
-          <strong>{{title}}</strong> - {{description}}
+          <strong>{{title}}</strong>
+          <div>{{body}}</div>
+          <div>Posted by {{author}} on {{date}}</div>
+          <span>
+            <button type="button" class="btn btn-xs btn-default" onclick="editPost('{{_id}}')">Edit this Post</button>
+          </span>
+          <span>
+            <button type="button" class="btn btn-xs btn-default" onclick="deletePost('{{_id}}')">Trash this Post</button>
+          </span>
         </li>
         {{/each}}
       </ul>
     </script>
 
-    <!--linking to jquery and handlebars via cdn-->
+
+    <!--adding jquery and handlebars scripts via cdn-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.8/handlebars.min.js"></script>
 
@@ -36,31 +73,12 @@
         const greetingCompiled = Handlebars.compile(greetingTemplate);
         const greetingRendered = greetingCompiled(data);
 
+        
         $('body h1').first().after(greetingRendered);
 
-        refreshFileList(); 
+        refreshFileList();
       });
     </script>
-
-    
-
-    <!--<script>
-      $(document).ready(function() {
-        const data = {
-          list: [
-            {title: 'Post 1', post: 'jibba jabba'},
-            {title: 'Post 2', post: 'ooooohhh lordy'},
-            {title: 'Post 3', post: 'Dude, construction worker'},
-            {title: 'Post 4', post: 'handy dandy mandy'},
-          ],
-        };
-
-        const template = $('#list-template').html();
-        const compiled = Handlebars.compile(template);
-        $('#list-container').html(compiled(data));
-      });
-    </script>-->
-
 
   </body>
 </html>

@@ -4,6 +4,14 @@ const config = require('./config');
 const path = require('path');
 const router = require('./routes');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+//connecting to mongodb using the host & dbname from config/index.js
+mongoose.connect(`mongodb://${config.db.host}/${config.db.dbName}`);
+
+//requiring file.model.js
+require('./models/file.model.js');
+
 
 const app = express(); 
 

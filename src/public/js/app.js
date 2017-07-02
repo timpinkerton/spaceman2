@@ -1,5 +1,5 @@
 function getFiles() {
-    return $.ajax('/api/file')
+    return $.ajax('/api/blog')
         .then(res => {
         console.log("Results from getFiles()", res);
         return res;
@@ -16,8 +16,103 @@ function refreshFileList() {
 
   getFiles()
     .then(files => {
+    //saves the array to the global window object, so we can select a specific post when editing
+      window.fileList = files;
+
       const data = {files: files};
       const html = compiledTemplate(data);
       $('#list-container').html(html);
     })
+}
+
+//this will show/hide the form to add a new post and clear for form
+function toggleAddNewPost() {
+  console.log("Baby steps...");
+  clearForm({});
+  toggleFormVisibility();
+}
+
+//this shows/hides the form without changing the input fields
+function toggleFormVisibility() {
+  $('#form-container').toggleClass('hidden');
+}
+
+function submitNewPost() {
+    console.log("You added a new post!");
+
+    const title = $('#newPostTitle').val();
+    const body = $('#newPostBody').val();
+    const author = $('#newPostAuthor').val(); 
+    const fileData = {
+        title: title,
+        body: body,
+        author: author
+    };
+
+    //If _id (a post) already exist, method will be PUT and _id is appended to the url. If not, it's a new POST
+    let method, url;
+        if (fileData._id) {
+            method = 'PUT', 
+            url = '/api/blog/' + fileData._id;
+        } else {
+            method = 'POST',
+            url = '/api/blog'
+        }
+    
+
+    $.ajax({
+        type: method,
+        url: url,
+        data: JSON.stringify(fileData),
+        dataType: 'json',
+        contentType : 'application/json',
+    })
+    .done(function(response) {
+        console.log("new post!");
+        refreshFileList();
+        toggleAddNewPost();
+    })
+    .fail(function(error) {
+        console.log("did not work!", error);
+    });
+    
+    console.log('File data for the new post', fileData); 
+}
+
+
+function cancelNewPost() {
+    console.log("you changed your mind");
+    //hides the new post form
+    toggleAddNewPost();
+}
+
+function editPost(id){
+    console.log("this is where we edit post", id);
+
+    const file = window.fileList.find(file => file._id === id);
+        //this populates the form with the current info that we want to edit
+        if (file) {
+            clearForm(file); 
+            toggleFormVisibility();  
+        }
+}
+
+function clearForm(data){
+    data = data || {};
+
+    const file = {
+        title: data.title || '',
+        body: data.body || '',
+        author: data.author || '',
+        _id: data._id || '',
+    };
+
+    $('#newPostTitle').val(file.title);
+    $('#newPostBody').val(file.body);
+    $('#newPostAuthor').val(file.author);
+    $('#file-id').val(file._id);
+}
+
+function deletePost() {
+
 }

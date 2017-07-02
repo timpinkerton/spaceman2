@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const mongoose = require('mongoose');
 
 
 const FILES = [
@@ -9,24 +10,41 @@ const FILES = [
 ];
 
 
-router.use('/doc', function(req, res, next) {
-  res.end(`Documentation http://expressjs.com/`);
-});
+// router.use('/doc', function(req, res, next) {
+//   res.end(`Documentation http://expressjs.com/`);
+// });
 
 router.get('/blog', function(req, res, next){
-    res.send('This is where we list all posts');
+    mongoose.model('File').find({}, function(err, files) {
+    if (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+
+    res.json(files);
+    });
 });
 
-router.post('/file', function(req, res, next) {
-  const newId = '' + FILES.length;
-  const data = req.body;
-  data.id = newId;
+router.post('/blog', function(req, res, next) {
+    //creating a new monggoose model 
+    const File = mongoose.model('File');
+    const fileData = {
+        title: req.body.title,
+        body: req.body.body,
+        author: req.body.author
+    };
 
-  FILES.push(data);
-  res.status(201).json(data);
+    File.create(fileData, function(err, newFile) {
+        if (err) {
+        console.log(err);
+        return res.status(500).json(err);
+        }
+
+        res.json(newFile);
+    });
 });
 
-router.put('/file/:fileId', function(req, res, next) {
+router.put('/blog/:fileId', function(req, res, next) {
   const {fileId} = req.params;
   const file = FILES.find(entry => entry.id === fileId);
   if (!file) {
@@ -38,11 +56,11 @@ router.put('/file/:fileId', function(req, res, next) {
   res.json(file);
 });
 
-router.delete('/file/:fileId', function(req, res, next) {
+router.delete('/blog/:fileId', function(req, res, next) {
   res.end(`Deleting file '${req.params.fileId}'`);
 });
 
-router.get('/file/:fileId', function(req, res, next) {
+router.get('/blog/:fileId', function(req, res, next) {
     //this will return...
     const {fileId} = req.params; 
 
