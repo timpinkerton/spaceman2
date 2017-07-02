@@ -6,6 +6,7 @@ const FileSchema = new mongoose.Schema({
     body: String,
     author: String, 
     date: { type: Date, default: Date.now },
+    deleted: { type: Boolean, default: false }
 });
 
 //turning the schema into a mongoose model and storing it in 'File'

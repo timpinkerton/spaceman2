@@ -27,7 +27,6 @@ function refreshFileList() {
 
 //this will show/hide the form to add a new post and clear for form
 function toggleAddNewPost() {
-  console.log("Baby steps...");
   clearForm({});
   toggleFormVisibility();
 }
@@ -113,6 +112,22 @@ function clearForm(data){
     $('#file-id').val(file._id);
 }
 
-function deletePost() {
+function deletePost(id) {
+    console.log("file " + id + "is about to die");
 
+    if (confirm("Are you sure?")) {
+        $.ajax({
+        type: 'DELETE',
+        url: '/api/file/' + id,
+        dataType: 'json',
+        contentType : 'application/json',
+        })
+        .done(function(response) {
+            console.log("File", id, "is DOOMED!!!!!!");
+            refreshFileList();
+        })
+        .fail(function(error) {
+            console.log("I'm not dead yet!", error);
+        })
+  }
 }
