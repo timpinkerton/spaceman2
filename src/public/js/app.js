@@ -118,16 +118,16 @@ function deletePost(id) {
     if (confirm("Are you sure?")) {
         $.ajax({
         type: 'DELETE',
-        url: '/api/file/' + id,
+        url: '/api/blog/' + id,
         dataType: 'json',
         contentType : 'application/json',
         })
         .done(function(response) {
-            console.log("File", id, "is DOOMED!!!!!!");
+            console.log(id, " has been marked as deleted.");
             refreshFileList();
         })
         .fail(function(error) {
-            console.log("I'm not dead yet!", error);
+            console.log("This delete did not work.", error);
         })
   }
 }

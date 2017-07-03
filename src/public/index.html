@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="mystyles.css">
 
     <title>Spaceman Brewery</title>
   </head>
@@ -38,12 +39,13 @@
       <div id="list-container"></div>
     </div>
 
-
-
+    <!--template for posts-->
     <script id="list-template" type="text/x-handlebars-template">
       <ul class="list-group">
+        
+        <!--each post is a list item-->
         {{#each files}}
-        <li class="list-group-item">
+        <li class="list-group-item post">
           <strong>{{title}}</strong>
           <div>{{body}}</div>
           <div>Posted by {{author}} on {{date}}</div>
@@ -55,6 +57,7 @@
           </span>
         </li>
         {{/each}}
+
       </ul>
     </script>
 
@@ -68,8 +71,8 @@
     <!--this is the template created w/ handlebars-->
     <script>
       $(document).ready(function() {
-        const data = { post: "Spaceman" }
-        const greetingTemplate = 'hey {{post}}! make me some beer. Thanks';
+        const data = { post: "Spaceman" } 
+        const greetingTemplate = 'hey {{post}} make me some beer. Thanks';
         const greetingCompiled = Handlebars.compile(greetingTemplate);
         const greetingRendered = greetingCompiled(data);
 

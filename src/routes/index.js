@@ -89,7 +89,7 @@ router.delete('/blog/:fileId', function(req, res, next) {
             res.json(savedFile);
         })
 
-        })
+    })
 });
 
 router.get('/blog/:fileId', function(req, res, next) {
