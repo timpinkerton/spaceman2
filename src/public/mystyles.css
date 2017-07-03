@@ -1,6 +1,18 @@
 /*post styles*/
 
+body {
+    background: rgb(155, 46, 46);
+}
+
+.post-container {
+    margin-top: 80px; 
+}
+
 .post {
-    border-radius: 5%;
+    border-radius: 10px;
     margin-bottom: 1em; 
+}
+
+.btn-new-post {
+
 }
