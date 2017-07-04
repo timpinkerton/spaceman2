@@ -39,13 +39,12 @@ function toggleFormVisibility() {
 function submitNewPost() {
     console.log("You added a new post!");
 
-    const title = $('#newPostTitle').val();
-    const body = $('#newPostBody').val();
-    const author = $('#newPostAuthor').val(); 
+
     const fileData = {
-        title: title,
-        body: body,
-        author: author
+        title: $('#newPostTitle').val(),
+        body: $('#newPostBody').val(),
+        author: $('#newPostAuthor').val(),
+        _id: $('#post-id').val() 
     };
 
     //If _id (a post) already exist, method will be PUT and _id is appended to the url. If not, it's a new POST
@@ -109,7 +108,7 @@ function clearForm(data){
     $('#newPostTitle').val(file.title);
     $('#newPostBody').val(file.body);
     $('#newPostAuthor').val(file.author);
-    $('#file-id').val(file._id);
+    $('#post-id').val(file._id);
 }
 
 function deletePost(id) {

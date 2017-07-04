@@ -27,7 +27,7 @@ router.get('/blog', function(req, res, next){
 });
 
 router.post('/blog', function(req, res, next) {
-    //creating a new monggoose model 
+    //creating a new mongoose model 
     const File = mongoose.model('File');
     const fileData = {
         title: req.body.title,
@@ -59,8 +59,10 @@ router.put('/blog/:fileId', function(req, res, next) {
             return res.status(404).json({message: "File not found"});
         }
 
+        //this puts in the new edited data
         file.title = req.body.title;
-        file.description = req.body.description;
+        file.body = req.body.body;
+        file.author = req.body.author; 
 
         file.save(function(err, savedFile) {
             res.json(savedFile);
