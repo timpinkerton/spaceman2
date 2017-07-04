@@ -10,9 +10,19 @@ body {
 
 .post {
     border-radius: 10px;
-    margin-bottom: 1em; 
+    margin-bottom: 1em;
+    background:  rgba(255, 255, 255, .6)
 }
 
 .btn-new-post {
+    border-radius: 20px; 
+}
 
+input {
+    border-radius: 2px; 
+    width: 85%;
+}
+
+#newPostBody {
+    height: 200px; 
 }

@@ -10,6 +10,7 @@ function getFiles() {
         });
 }
 
+//refreshes the template with the list of files(posts)
 function refreshFileList() {
   const template = $('#list-template').html();
   const compiledTemplate = Handlebars.compile(template);
@@ -116,10 +117,11 @@ function clearForm(data){
 
 //to delete an existing post
 function deletePost(id) {
-    console.log("file " + id + "is about to die");
+    console.log(id + "is being deleted");
 
-    if (confirm("Are you sure?")) {
-        $.ajax({
+    // if (confirm("Are you sure?")) {
+        
+       return $.ajax({
         type: 'DELETE',
         url: '/api/blog/' + id,
         dataType: 'json',
@@ -132,5 +134,5 @@ function deletePost(id) {
         .fail(function(error) {
             console.log("This delete did not work.", error);
         })
-  }
+//   }
 }

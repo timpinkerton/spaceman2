@@ -33,7 +33,7 @@ router.post('/blog', function(req, res, next) {
     });
 });
 
-
+//updates the post based on the fileId
 router.put('/blog/:fileId', function(req, res, next) {
     const File = mongoose.model('File');
     const fileId = req.params.fileId; 
@@ -82,6 +82,7 @@ router.delete('/blog/:fileId', function(req, res, next) {
     })
 });
 
+//************************************** */
 router.get('/blog/:fileId', function(req, res, next) {
     //this will return...
     const {fileId} = req.params; 

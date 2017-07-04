@@ -61,49 +61,50 @@
       </div>
     </nav>
 
-
+    <!-- Main heading container -->
     <div class="container">
 
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Spaceman Brewery</h1>
-        <p>What to talk about here?</p>
+        <h1>The Spaceman Blog</h1>
+        <p>Read the blog posts below to hear the latest and greatest on Spaceman beer.</p>
 
-        <p>
-          <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
+        <p>Create a new blog post by clicking this button &raquo;&raquo;&raquo;
+          <!--clicking this button will show the form to add new posts-->
+          <button id="addNewPostButton" class="btn btn-primary btn-new-post" onclick="toggleAddNewPost()">New Post</button>
+
+          <!--<a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>-->
         </p>
+
+
+        <!--this is the form to add new posts and edit posts-->
+        <div id="form-container" class="panel hidden">
+          <form>
+            <input type="hidden" id="post-id" value="" />
+            <div>
+              <label>Title:</label>
+              <input type="text" id="newPostTitle">
+            </div>
+            <div>
+              <label>Post:</label>
+              <input type="text" id="newPostBody">
+            </div> 
+            <div>
+              <label>Author:</label>
+              <input type="text" id="newPostAuthor">
+            </div>
+
+            <!--buttons within the New Post form to either submit or cancel a new post-->
+            <button type="button" class="btn btn-default" onclick="submitNewPost()">Post it!</button>
+            <button type="button" class="btn btn-default" onclick="cancelNewPost()">Nevermind</button>
+
+          </form>
+        </div>
       </div>
+
 
     </div> <!-- /container -->
 
     <div class="container">
-
-      <!--clicking this button will show the form to add new posts-->
-      <button id="addNewPostButton" class="btn btn-primary btn-new-post" onclick="toggleAddNewPost()">New Post</button>
-
-      <!--this is the form to add new posts and edit posts-->
-      <div id="form-container" class="panel hidden">
-        <form>
-          <input type="hidden" id="post-id" value="" />
-          <div>
-            <label>Title:</label>
-            <input type="text" id="newPostTitle">
-          </div>
-          <div>
-            <label>Post:</label>
-            <input type="text" id="newPostBody">
-          </div> 
-          <div>
-            <label>Author:</label>
-            <input type="text" id="newPostAuthor">
-          </div>
-
-          <!--buttons within the New Post form to either submit or cancel a new post-->
-          <button type="button" class="btn btn-default" onclick="submitNewPost()">Post it!</button>
-          <button type="button" class="btn btn-default" onclick="cancelNewPost()">Nevermind</button>
-
-        </form>
-      </div>
       
       <!--this is the container for all the posts-->
       <div id="list-container"></div>
