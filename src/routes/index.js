@@ -2,18 +2,6 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 
 
-const FILES = [
-  {id: 'A', title: 'Arnie', description: 'lil baby arn'},
-  {id: 'B', title: 'Dusty', description: 'Stinkman'},
-  {id: 'C', title: 'Ham', description: 'Big Hammy'},
-  {id: 'D', title: 'BM', description: 'mug mug mug'},
-];
-
-
-// router.use('/doc', function(req, res, next) {
-//   res.end(`Documentation http://expressjs.com/`);
-// });
-
 //{$ne: true} included any Files where the 'deleted' field does not equal true
 router.get('/blog', function(req, res, next){
     mongoose.model('File').find({deleted: {$ne: true}}, function(err, files) {

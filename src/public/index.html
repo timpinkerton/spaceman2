@@ -67,8 +67,8 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Spaceman Brewery</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>What to talk about here?</p>
+
         <p>
           <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
         </p>
@@ -98,13 +98,14 @@
             <input type="text" id="newPostAuthor">
           </div>
 
-          <!--buttons to either submit or cancel a new post-->
+          <!--buttons within the New Post form to either submit or cancel a new post-->
           <button type="button" class="btn btn-default" onclick="submitNewPost()">Post it!</button>
           <button type="button" class="btn btn-default" onclick="cancelNewPost()">Nevermind</button>
 
         </form>
       </div>
-
+      
+      <!--this is the container for all the posts-->
       <div id="list-container"></div>
     </div>
 
@@ -140,13 +141,13 @@
     <!--this is the template created w/ handlebars-->
     <script>
       $(document).ready(function() {
-        const data = { post: "Spaceman" } 
-        const greetingTemplate = 'hey {{post}} make me some beer. Thanks';
-        const greetingCompiled = Handlebars.compile(greetingTemplate);
-        const greetingRendered = greetingCompiled(data);
+        // const data = { post: "Spaceman" } 
+        // const greetingTemplate = 'hey {{post}} make me some beer. Thanks';
+        // const greetingCompiled = Handlebars.compile(greetingTemplate);
+        // const greetingRendered = greetingCompiled(data);
 
         
-        $('body h1').first().after(greetingRendered);
+        // $('body h1').first().after(greetingRendered);
 
         refreshFileList();
       });
@@ -156,9 +157,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
 
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
     
     <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
     

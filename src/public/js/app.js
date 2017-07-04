@@ -36,6 +36,7 @@ function toggleFormVisibility() {
   $('#form-container').toggleClass('hidden');
 }
 
+//to submit a new post or submit changes when editing an existing post
 function submitNewPost() {
     console.log("You added a new post!");
 
@@ -77,13 +78,14 @@ function submitNewPost() {
     console.log('File data for the new post', fileData); 
 }
 
-
+//to cancel adding a new post or editing an existing post
 function cancelNewPost() {
     console.log("you changed your mind");
     //hides the new post form
     toggleAddNewPost();
 }
 
+//to edit an existing post
 function editPost(id){
     console.log("this is where we edit post", id);
 
@@ -95,6 +97,7 @@ function editPost(id){
         }
 }
 
+//to clear the New Post form
 function clearForm(data){
     data = data || {};
 
@@ -111,6 +114,7 @@ function clearForm(data){
     $('#post-id').val(file._id);
 }
 
+//to delete an existing post
 function deletePost(id) {
     console.log("file " + id + "is about to die");
 
