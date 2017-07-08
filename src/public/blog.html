@@ -51,8 +51,8 @@
         <div id="navbar" class="navbar-collapse collapse">
           
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="#home">Home</a></li>
-            <li><a href="https://www.google.com/maps">Blog</a></li>
+            <li><a href="#home">Home</a></li>
+            <li class="active"><a href="#blog">Blog</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
           
@@ -65,16 +65,19 @@
     <div class="container">
 
       <div class="jumbotron">
-        <h1>Welcome to Spaceman Brewery</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non quam convallis ante faucibus viverra nec ut turpis. Cras eu nisi in lacus fringilla ultrices sit amet in nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor iaculis purus, vitae tincidunt justo semper vitae. Praesent vitae tortor commodo, porttitor diam a, fermentum enim. Sed ante leo, rutrum consectetur rhoncus at, vulputate a mauris. Morbi pulvinar sollicitudin turpis non rhoncus.</p>
+        <h1>The Spaceman Blog</h1>
+        <p>Read the blog posts below to hear the latest and greatest on Spaceman beer.</p>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean non quam convallis ante faucibus viverra nec ut turpis. Cras eu nisi in lacus fringilla ultrices sit amet in nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor iaculis purus, vitae tincidunt justo semper vitae. Praesent vitae tortor commodo, porttitor diam a, fermentum enim. Sed ante leo, rutrum consectetur rhoncus at, vulputate a mauris. Morbi pulvinar sollicitudin turpis non rhoncus.
+        <p>Create a new blog post by clicking this button &raquo;&raquo;&raquo;
+          <!--clicking this button will show the form to add new posts-->
+          <button id="addNewPostButton" class="btn btn-primary btn-new-post" onclick="toggleAddNewPost()">New Post</button>
+
+          <!--<a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>-->
         </p>
 
 
         <!--this is the form to add new posts and edit posts-->
-
-        <!--<div id="form-container" class="panel hidden">
+        <div id="form-container" class="panel hidden">
           <form>
             <input type="hidden" id="post-id" value="" />
             <div>
@@ -91,29 +94,28 @@
             </div>
 
             <!--buttons within the New Post form to either submit or cancel a new post-->
-            <!--<button type="button" class="btn btn-default" onclick="submitNewPost()">Post it!</button>
+            <button type="button" class="btn btn-default" onclick="submitNewPost()">Post it!</button>
             <button type="button" class="btn btn-default" onclick="cancelNewPost()">Nevermind</button>
 
           </form>
-        </div>-->
-
+        </div>
       </div>
 
 
     </div> <!-- /container -->
 
-    <!--<div class="container">-->
+    <div class="container">
       
       <!--this is the container for all the posts-->
-      <!--<div id="list-container"></div>
-    </div>-->
+      <div id="list-container"></div>
+    </div>
 
     <!--template for posts-->
-    <!--<script id="list-template" type="text/x-handlebars-template">
-      <ul class="list-group">-->
+    <script id="list-template" type="text/x-handlebars-template">
+      <ul class="list-group">
         
         <!--each post is a list item-->
-        <!--{{#each files}}
+        {{#each files}}
         <li class="list-group-item post">
           <strong>{{title}}</strong>
           <div>{{body}}</div>
@@ -128,7 +130,7 @@
         {{/each}}
 
       </ul>
-    </script>-->
+    </script>
 
     <!--adding jquery and handlebars scripts via cdn-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

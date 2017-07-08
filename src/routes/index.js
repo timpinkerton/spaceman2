@@ -11,6 +11,8 @@ router.get('/blog', function(req, res, next){
     }
 
     res.json(files);
+
+
     });
 });
 
@@ -70,9 +72,9 @@ router.delete('/blog/:fileId', function(req, res, next) {
             return res.status(500).json(err);
         }
         if (!file) {
-            return res.status(404).json({message: "File not found"});
+            return res.status(404).json({message: "not found"});
         }
-
+        //this changes the deleted field to true and will not show in the get request above
         file.deleted = true; 
 
         file.save(function(err, savedFile) {
@@ -82,7 +84,7 @@ router.delete('/blog/:fileId', function(req, res, next) {
     })
 });
 
-//************************************** */
+//**************************************************************************************
 router.get('/blog/:fileId', function(req, res, next) {
     //this will return...
     const {fileId} = req.params; 

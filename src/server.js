@@ -22,6 +22,7 @@ app.use(express.static(publicPath));
 
 app.use(bodyParser.json());
 
+//this mounts the middleware at the path /api, the router.get will get the subpath (ex: /blog)
 app.use('/api', router);
 
 

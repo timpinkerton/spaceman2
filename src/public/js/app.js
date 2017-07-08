@@ -1,11 +1,12 @@
 function getFiles() {
+    //$.ajax performs an asynchronous http request
     return $.ajax('/api/blog')
         .then(res => {
-        console.log("Results from getFiles()", res);
+        console.log("this is what we get from getFiles()", res);
         return res;
         })
         .fail(err => {
-        console.log("Error in getFiles()", err);
+        console.log("error in getFiles()", err);
         throw err;
         });
 }
@@ -15,6 +16,7 @@ function refreshFileList() {
   const template = $('#list-template').html();
   const compiledTemplate = Handlebars.compile(template);
 
+  //calls the getFiles function defined above
   getFiles()
     .then(files => {
     //saves the array to the global window object, so we can select a specific post when editing
