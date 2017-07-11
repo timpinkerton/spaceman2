@@ -16,6 +16,7 @@ const File = mongoose.model('File', FileSchema);
 module.exports = File; 
 
 //this gets the number of documents in the collection
+
 File.count({}, function (err, count){
     if (err) {
         throw err; 
