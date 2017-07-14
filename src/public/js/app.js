@@ -12,7 +12,7 @@ function getFiles() {
 }
 
 //refreshes the template with the list of files(posts)
-function refreshFileList() {
+function refreshPostList() {
   const template = $('#list-template').html();
   const compiledTemplate = Handlebars.compile(template);
 
@@ -61,7 +61,7 @@ function submitNewPost() {
             url = '/api/blog'
         }
     
-
+    //.ajax() based on the method decided above (PUT or POST)
     $.ajax({
         type: method,
         url: url,
@@ -71,7 +71,7 @@ function submitNewPost() {
     })
     .done(function(response) {
         console.log("new post!");
-        refreshFileList();
+        refreshPostList();
         toggleAddNewPost();
     })
     .fail(function(error) {
@@ -120,9 +120,7 @@ function clearForm(data){
 //to delete an existing post
 function deletePost(id) {
     console.log(id + "is being deleted");
-
-    // if (confirm("Are you sure?")) {
-        
+        //creates a DELETE method 
        return $.ajax({
         type: 'DELETE',
         url: '/api/blog/' + id,
@@ -131,10 +129,9 @@ function deletePost(id) {
         })
         .done(function(response) {
             console.log(id, " has been marked as deleted.");
-            refreshFileList();
+            refreshPostList();
         })
         .fail(function(error) {
             console.log("This delete did not work.", error);
         })
-//   }
 }

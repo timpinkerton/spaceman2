@@ -10,8 +10,8 @@ router.get('/blog', function(req, res, next){
         res.status(500).json(err);
     }
 
+    //responds with all files where the deleted field is false
     res.json(files);
-
 
     });
 });
@@ -61,7 +61,7 @@ router.put('/blog/:fileId', function(req, res, next) {
         })
     });
 
-
+//to delete a post
 router.delete('/blog/:fileId', function(req, res, next) {
     const File = mongoose.model('File');
     const fileId = req.params.fileId; 
@@ -85,17 +85,17 @@ router.delete('/blog/:fileId', function(req, res, next) {
 });
 
 //**************************************************************************************
-router.get('/blog/:fileId', function(req, res, next) {
-    //this will return...
-    const {fileId} = req.params; 
+// router.get('/blog/:fileId', function(req, res, next) {
+//     to return a sinlge post
+//     const {fileId} = req.params; 
 
-    const file = FILES.find(entry => entry.id === fileId);
-    //returns an error message if the fileId does not exist
-    if (!file) {
-        return res.status(404).end(`Sorry, '${fileId}' could not be found.`);
-    }
-    //returns all files
-    res.json(FILES);
-});
+//     const file = FILES.find(entry => entry.id === fileId);
+//     returns an error message if the fileId does not exist
+//     if (!file) {
+//         return res.status(404).end(`Sorry, '${fileId}' could not be found.`);
+//     }
+//     returns all files
+//     res.json(FILES);
+// });
 
 module.exports = router; 
