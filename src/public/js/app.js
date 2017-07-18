@@ -1,28 +1,28 @@
-function getFiles() {
+function getPosts() {
     //$.ajax performs an asynchronous http request
     return $.ajax('/api/blog')
         .then(res => {
-        console.log("this is what we get from getFiles()", res);
+        console.log("this is what we get from getPosts()", res);
         return res;
         })
         .fail(err => {
-        console.log("error in getFiles()", err);
+        console.log("error in getPosts()", err);
         throw err;
         });
 }
 
-//refreshes the template with the list of files(posts)
+//refreshes the template with the list of posts(posts)
 function refreshPostList() {
   const template = $('#list-template').html();
   const compiledTemplate = Handlebars.compile(template);
 
-  //calls the getFiles function defined above
-  getFiles()
-    .then(files => {
+  //calls the getPosts function defined above
+  getPosts()
+    .then(posts => {
     //saves the array to the global window object, so we can select a specific post when editing
-      window.fileList = files;
+      window.postList = posts;
 
-      const data = {files: files};
+      const data = {posts: posts};
       const html = compiledTemplate(data);
       $('#list-container').html(html);
     })
@@ -44,7 +44,7 @@ function submitNewPost() {
     console.log("You added a new post!");
 
 
-    const fileData = {
+    const postData = {
         title: $('#newPostTitle').val(),
         body: $('#newPostBody').val(),
         author: $('#newPostAuthor').val(),
@@ -53,9 +53,9 @@ function submitNewPost() {
 
     //If _id (a post) already exist, method will be PUT and _id is appended to the url. If not, it's a new POST
     let method, url;
-        if (fileData._id) {
+        if (postData._id) {
             method = 'PUT', 
-            url = '/api/blog/' + fileData._id;
+            url = '/api/blog/' + postData._id;
         } else {
             method = 'POST',
             url = '/api/blog'
@@ -65,7 +65,7 @@ function submitNewPost() {
     $.ajax({
         type: method,
         url: url,
-        data: JSON.stringify(fileData),
+        data: JSON.stringify(postData),
         dataType: 'json',
         contentType : 'application/json',
     })
@@ -78,7 +78,7 @@ function submitNewPost() {
         console.log("did not work!", error);
     });
     
-    console.log('File data for the new post', fileData); 
+    console.log('post data for the new post', postData); 
 }
 
 //to cancel adding a new post or editing an existing post
@@ -92,10 +92,10 @@ function cancelNewPost() {
 function editPost(id){
     console.log("this is where we edit post", id);
 
-    const file = window.fileList.find(file => file._id === id);
+    const post = window.postList.find(post => post._id === id);
         //this populates the form with the current info that we want to edit
-        if (file) {
-            clearForm(file); 
+        if (post) {
+            clearForm(post); 
             toggleFormVisibility();  
         }
 }
@@ -104,17 +104,17 @@ function editPost(id){
 function clearForm(data){
     data = data || {};
 
-    const file = {
+    const post = {
         title: data.title || '',
         body: data.body || '',
         author: data.author || '',
         _id: data._id || '',
     };
 
-    $('#newPostTitle').val(file.title);
-    $('#newPostBody').val(file.body);
-    $('#newPostAuthor').val(file.author);
-    $('#post-id').val(file._id);
+    $('#newPostTitle').val(post.title);
+    $('#newPostBody').val(post.body);
+    $('#newPostAuthor').val(post.author);
+    $('#post-id').val(post._id);
 }
 
 //to delete an existing post

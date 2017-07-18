@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 //connecting to mongodb using the host & dbname from config/index.js
 mongoose.connect(`mongodb://${config.db.host}/${config.db.dbName}`);
 
-//requiring file.model.js
-require('./models/file.model.js');
+//requiring post.model.js
+require('./models/post.model.js');
 
 
 const app = express(); 

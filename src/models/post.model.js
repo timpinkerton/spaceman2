@@ -9,23 +9,23 @@ const FileSchema = new mongoose.Schema({
     deleted: { type: Boolean, default: false }
 });
 
-//turning the schema into a mongoose model and storing it in 'File'
-const File = mongoose.model('File', FileSchema);
+//turning the schema into a mongoose model and storing it in 'Post'
+const Post = mongoose.model('Post', FileSchema);
 
 //exporting the model created above
-module.exports = File; 
+module.exports = Post; 
 
-//this gets the number of documents in the collection
+//this gets the number of documents (posts) in the collection
 
-File.count({}, function (err, count){
+Post.count({}, function (err, count){
     if (err) {
         throw err; 
     }
 
     if (count > 0) return ;
 
-    const files = require('./file.seed.json');
-    File.create(files, function(err, newFiles) {
+    const posts = require('./post.seed.json');
+    Post.create(posts, function(err, newPosts) {
     if (err) {
         throw err;
     }

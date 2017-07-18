@@ -2,97 +2,97 @@ const router = require('express').Router();
 const mongoose = require('mongoose');
 
 
-//{$ne: true} included any Files where the 'deleted' field does not equal true
+//{$ne: true} included any Posts where the 'deleted' field does not equal true
 router.get('/blog', function(req, res, next){
-    mongoose.model('File').find({deleted: {$ne: true}}, function(err, files) {
+    mongoose.model('Post').find({deleted: {$ne: true}}, function(err, posts) {
     if (err) {
         console.log(err);
         res.status(500).json(err);
     }
 
     //responds with all files where the deleted field is false
-    res.json(files);
+    res.json(posts);
 
     });
 });
 
 router.post('/blog', function(req, res, next) {
     //creating a new mongoose model 
-    const File = mongoose.model('File');
-    const fileData = {
+    const Post = mongoose.model('File');
+    const postData = {
         title: req.body.title,
         body: req.body.body,
         author: req.body.author
     };
 
-    File.create(fileData, function(err, newFile) {
+    File.create(postData, function(err, newPost) {
         if (err) {
         console.log(err);
         return res.status(500).json(err);
         }
 
-        res.json(newFile);
+        res.json(newPost);
     });
 });
 
-//updates the post based on the fileId
-router.put('/blog/:fileId', function(req, res, next) {
-    const File = mongoose.model('File');
-    const fileId = req.params.fileId; 
+//updates the post based on the postId
+router.put('/blog/:postId', function(req, res, next) {
+    const Post = mongoose.model('Post');
+    const PostId = req.params.postId; 
 
-    File.findById(fileId, function(err, file) {
+    File.findById(postId, function(err, post) {
         if (err) {
             console.log(err);
             return res.status(500).json(err);
         }
-        if (!file) {
-            return res.status(404).json({message: "File not found"});
+        if (!post) {
+            return res.status(404).json({message: "Post was not found"});
         }
 
         //this puts in the new edited data
-        file.title = req.body.title;
-        file.body = req.body.body;
-        file.author = req.body.author; 
+        post.title = req.body.title;
+        post.body = req.body.body;
+        post.author = req.body.author; 
 
-        file.save(function(err, savedFile) {
-            res.json(savedFile);
+        post.save(function(err, savedPost) {
+            res.json(savedPost);
         })
 
         })
     });
 
 //to delete a post
-router.delete('/blog/:fileId', function(req, res, next) {
-    const File = mongoose.model('File');
-    const fileId = req.params.fileId; 
+router.delete('/blog/:postId', function(req, res, next) {
+    const Post = mongoose.model('Post');
+    const postId = req.params.postId; 
 
-    File.findById(fileId, function(err, file) {
+    Post.findById(postId, function(err, post) {
         if (err) {
             console.log(err);
             return res.status(500).json(err);
         }
-        if (!file) {
+        if (!post {
             return res.status(404).json({message: "not found"});
         }
         //this changes the deleted field to true and will not show in the get request above
-        file.deleted = true; 
+        post.deleted = true; 
 
-        file.save(function(err, savedFile) {
-            res.json(savedFile);
+        post.save(function(err, savedPost) {
+            res.json(savedPost);
         })
 
     })
 });
 
 //**************************************************************************************
-// router.get('/blog/:fileId', function(req, res, next) {
+// router.get('/blog/:postId', function(req, res, next) {
 //     to return a sinlge post
-//     const {fileId} = req.params; 
+//     const {postId} = req.params; 
 
-//     const file = FILES.find(entry => entry.id === fileId);
-//     returns an error message if the fileId does not exist
+//     const file = FILES.find(entry => entry.id === postId);
+//     returns an error message if the postId does not exist
 //     if (!file) {
-//         return res.status(404).end(`Sorry, '${fileId}' could not be found.`);
+//         return res.status(404).end(`Sorry, '${postId}' could not be found.`);
 //     }
 //     returns all files
 //     res.json(FILES);
