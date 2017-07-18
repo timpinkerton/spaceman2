@@ -18,14 +18,14 @@ router.get('/blog', function(req, res, next){
 
 router.post('/blog', function(req, res, next) {
     //creating a new mongoose model 
-    const Post = mongoose.model('File');
+    const Post = mongoose.model('Post');
     const postData = {
         title: req.body.title,
         body: req.body.body,
         author: req.body.author
     };
 
-    File.create(postData, function(err, newPost) {
+    Post.create(postData, function(err, newPost) {
         if (err) {
         console.log(err);
         return res.status(500).json(err);
@@ -38,9 +38,9 @@ router.post('/blog', function(req, res, next) {
 //updates the post based on the postId
 router.put('/blog/:postId', function(req, res, next) {
     const Post = mongoose.model('Post');
-    const PostId = req.params.postId; 
+    const postId = req.params.postId; 
 
-    File.findById(postId, function(err, post) {
+    Post.findById(postId, function(err, post) {
         if (err) {
             console.log(err);
             return res.status(500).json(err);
@@ -71,7 +71,7 @@ router.delete('/blog/:postId', function(req, res, next) {
             console.log(err);
             return res.status(500).json(err);
         }
-        if (!post {
+        if (!post) {
             return res.status(404).json({message: "not found"});
         }
         //this changes the deleted field to true and will not show in the get request above
